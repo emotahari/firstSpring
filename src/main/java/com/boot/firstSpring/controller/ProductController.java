@@ -2,16 +2,17 @@ package com.boot.firstSpring.controller;
 
 import com.boot.firstSpring.Service.ProductService;
 import com.boot.firstSpring.entity.Product;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.boot.firstSpring.repo.ProductRepository;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 
 @RestController
-//@RequestMapping("/api/v1")
+@RequestMapping("/api/v1")
 public class ProductController {
-
+    private final ProductRepository productRepository;
     @GetMapping("/hello")
     public String hello() {
         return "helloo";
@@ -19,7 +20,8 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductRepository productRepository, ProductService productService) {
+        this.productRepository = productRepository;
         this.productService = productService;
     }
 
@@ -35,7 +37,7 @@ public class ProductController {
     // Get all products
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        return (List<Product>) productService.fetchAllProducts();
+        return  productRepository.findAll();
     }
 
 
