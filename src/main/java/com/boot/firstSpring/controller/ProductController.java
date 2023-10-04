@@ -1,11 +1,9 @@
 package com.boot.firstSpring.controller;
-
 import com.boot.firstSpring.Service.ProductService;
 import com.boot.firstSpring.entity.Product;
 import com.boot.firstSpring.repo.ProductRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
@@ -25,6 +23,7 @@ public class ProductController {
         this.productService = productService;
     }
 
+
     // Create a new product
 //    @PostMapping("/product")
 //    public ResponseEntity<Product> saveProduct(@RequestBody Product product)
@@ -32,6 +31,14 @@ public class ProductController {
 //        Product newProduct = productRepository.save(product);
 //        return ResponseEntity.ok(newProduct);
 //    }
+
+    // Create a new product
+    @PostMapping("/product")
+    public ResponseEntity<Product> saveProduct(@RequestBody Product product)
+    {
+        Product newProduct = productRepository.save(product);
+        return ResponseEntity.ok(newProduct);
+    }
 
 
     // Get all products
